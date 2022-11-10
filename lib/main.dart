@@ -16,22 +16,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
+      title: 'My First Flutter Project',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.red,
           foregroundColor: Colors.black,
         ),
       ),
 
+      home: const RandomWords(), // 设置导航栈的第一个页面
+
       // 配置各个页面具体的路由名，使用导航栈来跳转页面
       // initialRoute: '/',
       // routes: {
-      //   '/': (context) => const RandomWords(), // 设置导航栈的第一个页面
-      //   '/second': (context) => const SecondRoute(), // 设置导航栈的第二个页面
+      //   '/': (context) => const RandomWords(), // 指定导航栈的第一个页面
+      //   '/second': (context) => const SecondRoute(), // 注册其他页面到导航栈中
       // },
-
-      home: const RandomWords(), // 设置导航栈的第一个页面
 
       // 方式一：直接传参
       routes: {
@@ -74,10 +74,10 @@ class _RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Startup Name Generator'),
+        title: const Text('My First Flutter Project'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.list),
+            icon: const Icon(Icons.headphones),
             onPressed: _pushSecondPage,
             tooltip: 'Saved Suggestions',
           ),
