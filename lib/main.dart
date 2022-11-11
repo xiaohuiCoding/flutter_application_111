@@ -1,10 +1,7 @@
-// Copyright 2018 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
+import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -120,6 +117,8 @@ class _RandomWordsState extends State<RandomWords> {
               });
             },
             onLongPress: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
               // 1.基础样式的弹窗
               // showDialog(
               //     context: context,
@@ -145,37 +144,37 @@ class _RandomWordsState extends State<RandomWords> {
               //     });
 
               // 2.iOS 样式的弹窗
-              showCupertinoDialog(
-                context: context,
-                builder: (context) {
-                  return CupertinoAlertDialog(
-                    title: const Text('提示'),
-                    content: Text(alreadySaved ? '您要取消收藏吗？' : '您要收藏吗？'),
-                    // content: const Icon(Icons.favorite_border),
-                    actions: <Widget>[
-                      CupertinoDialogAction(
-                        child: const Text('取消'),
-                        onPressed: () {
-                          Navigator.of(context).pop('cancel');
-                        },
-                      ),
-                      CupertinoDialogAction(
-                        child: const Text('确认'),
-                        onPressed: () {
-                          setState(() {
-                            if (alreadySaved) {
-                              _saved.remove(_suggestions[index]);
-                            } else {
-                              _saved.add(_suggestions[index]);
-                            }
-                          });
-                          Navigator.of(context).pop('ok');
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              // showCupertinoDialog(
+              //   context: context,
+              //   builder: (context) {
+              //     return CupertinoAlertDialog(
+              //       title: const Text('提示'),
+              //       content: Text(alreadySaved ? '您要取消收藏吗？' : '您要收藏吗？'),
+              //       // content: const Icon(Icons.favorite_border),
+              //       actions: <Widget>[
+              //         CupertinoDialogAction(
+              //           child: const Text('取消'),
+              //           onPressed: () {
+              //             Navigator.of(context).pop('cancel');
+              //           },
+              //         ),
+              //         CupertinoDialogAction(
+              //           child: const Text('确认'),
+              //           onPressed: () {
+              //             setState(() {
+              //               if (alreadySaved) {
+              //                 _saved.remove(_suggestions[index]);
+              //               } else {
+              //                 _saved.add(_suggestions[index]);
+              //               }
+              //             });
+              //             Navigator.of(context).pop('ok');
+              //           },
+              //         ),
+              //       ],
+              //     );
+              //   },
+              // );
             },
           );
         },
@@ -240,13 +239,7 @@ class SecondRoute extends StatelessWidget {
       appBar: AppBar(
         title: Text(args.title),
       ),
-      body: Center(
-          child: ElevatedButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Text(args.message),
-      )),
+      body: Center(child: Text(args.message)),
     );
   }
 }
@@ -263,13 +256,7 @@ class SecondRoute2 extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Center(
-          child: ElevatedButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        child: Text(message),
-      )),
+      body: Center(child: Text(message)),
     );
   }
 }
