@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
 import 'package:flutter/cupertino.dart';
-import 'home.dart';
+import 'first.dart';
 
 void main() {
   runApp(const MyApp());
@@ -74,7 +74,7 @@ class _RandomWordsState extends State<RandomWords> {
         title: const Text('My First Flutter Project'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.headphones),
+            icon: const Icon(Icons.ac_unit),
             onPressed: _pushSecondPage,
             tooltip: 'Saved Suggestions',
           ),
@@ -118,7 +118,7 @@ class _RandomWordsState extends State<RandomWords> {
             },
             onLongPress: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HomePage()));
+                  MaterialPageRoute(builder: (context) => const FirstPage()));
               // 1.基础样式的弹窗
               // showDialog(
               //     context: context,
@@ -239,7 +239,13 @@ class SecondRoute extends StatelessWidget {
       appBar: AppBar(
         title: Text(args.title),
       ),
-      body: Center(child: Text(args.message)),
+      body: Center(
+          child: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text(args.message),
+      )),
     );
   }
 }
@@ -256,7 +262,13 @@ class SecondRoute2 extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: Center(child: Text(message)),
+      body: Center(
+          child: ElevatedButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        child: Text(message),
+      )),
     );
   }
 }
