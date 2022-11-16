@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// 可变组件
 class RandomWords extends StatefulWidget {
   const RandomWords({super.key});
 
@@ -108,6 +109,7 @@ class _RandomWordsState extends State<RandomWords> {
               semanticLabel: alreadySaved ? 'Remove from saved' : 'Save',
             ),
             onTap: () {
+              // 可变组件状态变更：刷新UI
               setState(() {
                 if (alreadySaved) {
                   _saved.remove(_suggestions[index]);
@@ -116,69 +118,79 @@ class _RandomWordsState extends State<RandomWords> {
                 }
               });
             },
+            // 长按事件
             onLongPress: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const FirstPage()));
-              // 1.基础样式的弹窗
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return AlertDialog(
-              //         title: const Text('提示'),
-              //         content: Text(alreadySaved ? '您要取消收藏吗？' : '您要收藏吗？'),
-              //         actions: [
-              //           TextButton(
-              //               onPressed: () {
-              //                 Navigator.of(context).pop('cancel');
-              //               },
-              //               child: const Text('取消')),
-              //           TextButton(
-              //               onPressed: () {
-              //                 Navigator.of(context).pop('cancel');
-              //               },
-              //               child: const Text('确认'))
-              //         ],
-              //         // elevation: 24,
-              //         // shape: const CircleBorder(),
-              //       );
-              //     });
-
-              // 2.iOS 样式的弹窗
-              // showCupertinoDialog(
-              //   context: context,
-              //   builder: (context) {
-              //     return CupertinoAlertDialog(
-              //       title: const Text('提示'),
-              //       content: Text(alreadySaved ? '您要取消收藏吗？' : '您要收藏吗？'),
-              //       // content: const Icon(Icons.favorite_border),
-              //       actions: <Widget>[
-              //         CupertinoDialogAction(
-              //           child: const Text('取消'),
-              //           onPressed: () {
-              //             Navigator.of(context).pop('cancel');
-              //           },
-              //         ),
-              //         CupertinoDialogAction(
-              //           child: const Text('确认'),
-              //           onPressed: () {
-              //             setState(() {
-              //               if (alreadySaved) {
-              //                 _saved.remove(_suggestions[index]);
-              //               } else {
-              //                 _saved.add(_suggestions[index]);
-              //               }
-              //             });
-              //             Navigator.of(context).pop('ok');
-              //           },
-              //         ),
-              //       ],
-              //     );
-              //   },
-              // );
             },
           );
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: 'Add', // used by assistive technologies
+        onPressed: showAlertEvent,
+        child: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  void showAlertEvent() {
+    // 1.基础样式的弹窗
+    // showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return AlertDialog(
+    //         title: const Text('提示'),
+    //         content: const Text('即将插入一条新数据，确认码？'),
+    //         actions: [
+    //           TextButton(
+    //               onPressed: () {
+    //                 Navigator.of(context).pop();
+    //               },
+    //               child: const Text('取消')),
+    //           TextButton(
+    //               onPressed: () {
+    //                 // 可变组件状态变更：刷新UI
+    //                 setState(() {
+    //                   _suggestions.insert(0, generateWordPairs().take(1).first);
+    //                 });
+    //                 Navigator.of(context).pop();
+    //               },
+    //               child: const Text('确认'))
+    //         ],
+    //         // elevation: 24,
+    //         // shape: const CircleBorder(),
+    //       );
+    //     });
+
+    // 2.iOS 样式的弹窗
+    showCupertinoDialog(
+      context: context,
+      builder: (context) {
+        return CupertinoAlertDialog(
+          title: const Text('提示'),
+          content: const Text('即将插入一条新数据，确认码？'),
+          // content: const Icon(Icons.favorite_border),
+          actions: <Widget>[
+            CupertinoDialogAction(
+              child: const Text('取消'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            CupertinoDialogAction(
+              child: const Text('确认'),
+              onPressed: () {
+                // 可变组件状态变更：刷新UI
+                setState(() {
+                  _suggestions.insert(0, generateWordPairs().take(1).first);
+                });
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
