@@ -61,6 +61,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  # 下面是创建的资源文件夹及添加到其中的资源！
   assets:
     - images/2.0x/fish.png
     - images/dashatars.webp
