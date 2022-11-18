@@ -1,6 +1,10 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'detail.dart';
+import 'detail2.dart';
+import 'detail3.dart';
+import 'detail4.dart';
+import 'detail5.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
@@ -9,21 +13,29 @@ class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('第一页'),
+        title: const Text(''),
         actions: [
           TextButton(
               onPressed: () {
-                pushEventOne(context); // 带参数的函数调用方式一
+                pushEvent(context); // 带参数的函数调用方式一
               },
-              child: const Text('事件1',
+              child: const Text('按钮',
                   style: TextStyle(color: Colors.white, fontSize: 18))),
           TextButton(
-              onPressed: () => pushEventTwo(context), // 带参数的函数调用方式二
-              child: const Text('事件2',
+              onPressed: () => pushEvent2(context), // 带参数的函数调用方式二
+              child: const Text('按钮',
                   style: TextStyle(color: Colors.white, fontSize: 18))),
           TextButton(
-              onPressed: () => pushEventThree(context), // 带参数的函数调用方式二
-              child: const Text('事件3',
+              onPressed: () => pushEvent3(context),
+              child: const Text('按钮',
+                  style: TextStyle(color: Colors.white, fontSize: 18))),
+          TextButton(
+              onPressed: () => pushEvent4(context),
+              child: const Text('按钮',
+                  style: TextStyle(color: Colors.white, fontSize: 18))),
+          TextButton(
+              onPressed: () => pushEvent5(context),
+              child: const Text('按钮',
                   style: TextStyle(color: Colors.white, fontSize: 18))),
         ],
       ),
@@ -47,20 +59,32 @@ class FirstPage extends StatelessWidget {
     );
   }
 
-  void pushEventOne(context) {
+  void pushEvent(context) {
+    // log(logEvent());
+    // renderSome();
+
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const DetailPage()));
   }
 
-  void pushEventTwo(context) {
+  void pushEvent2(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const DetailPage()));
+        context, MaterialPageRoute(builder: (context) => const DetailPage2()));
   }
 
-  void pushEventThree(context) {
-    log(logEvent());
+  void pushEvent3(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const DetailPage3()));
+  }
 
-    renderSome();
+  void pushEvent4(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const DetailPage4()));
+  }
+
+  void pushEvent5(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const DetailPage5()));
   }
 
   // 1.带返回值的常规函数

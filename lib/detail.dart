@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
@@ -9,54 +8,52 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('详情页'),
+        title: const Text('处理手势'),
       ),
       body: const Center(
-        // child: Text('show some detail info...'),
-        child: MyButton(),
+        // child: LessButton(),
+        child: FulButton(),
       ),
     );
   }
 }
 
 // 1.不可变的button组件
-// class MyButton extends StatelessWidget {
-//   const MyButton({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         log('MyButton was tapped!');
-//       },
-//       child: Container(
-//         height: 50.0,
-//         padding: const EdgeInsets.all(8.0),
-//         margin: const EdgeInsets.symmetric(horizontal: 8.0),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(4.0),
-//           color: Colors.lightGreen[500],
-//         ),
-//         child: const Center(
-//           child: Text('这是一个Container实例，可以接收手势，点点看'),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// 2.可变的button组件
-class MyButton extends StatefulWidget {
-  const MyButton({super.key});
+class LessButton extends StatelessWidget {
+  const LessButton({super.key});
 
   @override
-  State<MyButton> createState() => _MyButtonState();
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 50.0,
+        padding: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.0),
+          color: const Color.fromRGBO(200, 200, 200, 1),
+        ),
+        child: const Center(
+          child: Text('一个不可变Container的实例'),
+        ),
+      ),
+    );
+  }
 }
 
-class _MyButtonState extends State<MyButton> {
-  int _colorR = 0;
-  int _colorG = 0;
-  int _colorB = 0;
+// 2.可变的button组件
+class FulButton extends StatefulWidget {
+  const FulButton({super.key});
+
+  @override
+  State<FulButton> createState() => _FulButtonState();
+}
+
+class _FulButtonState extends State<FulButton> {
+  int _colorR = 200;
+  int _colorG = 200;
+  int _colorB = 200;
 
   @override
   Widget build(BuildContext context) {
@@ -74,10 +71,10 @@ class _MyButtonState extends State<MyButton> {
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.0),
-          color: Color.fromRGBO(_colorR - 5, _colorG + 10, _colorB - 100, 1),
+          color: Color.fromRGBO(_colorR, _colorG, _colorB, 1),
         ),
         child: const Center(
-          child: Text('一个Container实例，可以接收手势，点击可以变色～'),
+          child: Text('一个可变Container的实例，可以接收手势，点点看！'),
         ),
       ),
     );
